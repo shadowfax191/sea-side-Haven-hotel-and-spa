@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { useLoaderData, useNavigate } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -13,7 +13,6 @@ const Details = () => {
     const today = new Date()
     const [date, setDate] = useState(today.toISOString().split('T')[0])
     const [bookedData, setBooked] = useState([])
-    // const navigate = useNavigate()
     const [acc, setAcc] = useState(false)
     const confirm = bookedData.some(book => book.date == date && book.roomId == detail._id)
 

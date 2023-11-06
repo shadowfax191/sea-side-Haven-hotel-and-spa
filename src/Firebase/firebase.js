@@ -7,12 +7,12 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyA-QswHkY5r0KD8t-80N4K5Rd0fzeucFg4",
-  authDomain: "sea-side-haven.firebaseapp.com",
-  projectId: "sea-side-haven",
-  storageBucket: "sea-side-haven.appspot.com",
-  messagingSenderId: "419565343460",
-  appId: "1:419565343460:web:91bdf893dcc2d7981112f1"
+  apiKey:import.meta.env.VITE_apiKey ,
+  authDomain:import.meta.env.VITE_authDomain ,
+  projectId:import.meta.env.VITE_projectId ,
+  storageBucket:import.meta.env.VITE_storageBucket ,
+  messagingSenderId:import.meta.env.VITE_messagingSenderId ,
+  appId:import.meta.env.VITE_appId ,
 };
 
 // Initialize Firebase
