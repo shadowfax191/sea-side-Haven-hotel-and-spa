@@ -5,6 +5,7 @@ import { AuthContext } from "../Provider/AuthProvider";
 import toast from "react-hot-toast";
 import auth from "../Firebase/firebase";
 import { updateProfile } from "firebase/auth";
+import axios from "axios";
 
 
 const Register = () => {
@@ -21,6 +22,7 @@ const Register = () => {
            
             createUser(email,password)
             .then(res=>{
+                const uId=res.user.uid
                if(res.user.uid){
                 toast.success('Successfully Registration Complete ',
                 {
@@ -29,6 +31,10 @@ const Register = () => {
                     background: '#333',
                     color: '#fff',
                   },
+                })
+                axios.post('http://localhost:5000/jwt', { uId }, { withCredentials: true })
+                .then(res => {
+                    console.log(res.data);
                 })
                }
                const user =auth.currentUser

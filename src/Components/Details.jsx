@@ -20,15 +20,13 @@ const Details = () => {
 
 
     useEffect(() => {
-        fetch('http://localhost:5000/bookingData')
-            .then(res => res.json())
-            .then(data => setBooked(data))
+        axios.get(`http://localhost:5000/bookingData`,{withCredentials:true})
+        .then(res => setBooked(res.data))
     }, [])
 
     useEffect(() => {
-        fetch('http://localhost:5000/reviewData')
-            .then(res => res.json())
-            .then(data => setReview(data))
+            axios.get(`http://localhost:5000/reviewData`,{withCredentials:true})
+            .then(res => setReview(res.data))
     }, [])
 
     const handleSubmit = (e) => {

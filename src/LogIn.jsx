@@ -3,42 +3,89 @@ import NavBar from "./layout/NavBar";
 import { useContext } from "react";
 import { AuthContext } from "./Provider/AuthProvider";
 import toast from "react-hot-toast";
+import axios from "axios";
 
 const LogIn = () => {
-    const {signIn}=useContext(AuthContext)
-    const navigate =useNavigate()
-    const location=useLocation()
+    const { signIn ,signInWithGoogle } = useContext(AuthContext)
+    const navigate = useNavigate()
+    const location = useLocation()
+
     const handleSubmit = (e) => {
         e.preventDefault()
         const email = e.target.email.value
         const password = e.target.password.value
-        signIn(email,password)
-        .then(res=>{
-            if(res.user.uid){
-             toast.success('Successfully Login Complete ',
-             {
-               style: {
-                 borderRadius: '10px',
-                 background: '#333',
-                 color: '#fff',
-               },
-             })
-            }
-            navigate(location?.state?location.state:'/')
-        })
-            .catch(err=>{
+        signIn(email, password)
+            .then(res => {
+               const uId=res.user.uid
+                if (res.user.uid) {
+                    toast.success('Successfully Login Complete ',
+                        {
+                            style: {
+                                borderRadius: '10px',
+                                background: '#333',
+                                color: '#fff',
+                            },
+                        })
+                  
+                    axios.post('http://localhost:5000/jwt', { uId }, { withCredentials: true })
+                        .then(res => {
+                            console.log(res.data);
+                        })
+
+
+                }
+
+                navigate(location?.state ? location.state : '/')
+            })
+            .catch(err => {
                 console.log(err);
-               toast.error(err.message ,
-                {
-                  style: {
-                    borderRadius: '10px',
-                    background: '#FF0',
-                    color: '#333',
-                  },
-                });
+                toast.error(err.message,
+                    {
+                        style: {
+                            borderRadius: '10px',
+                            background: '#FF0',
+                            color: '#333',
+                        },
+                    });
             })
     }
 
+    const handleGoogle =()=>{
+        signInWithGoogle()
+        .then(res => {
+            const uId=res.user.uid
+             if (res.user.uid) {
+                 toast.success('Successfully Login Complete ',
+                     {
+                         style: {
+                             borderRadius: '10px',
+                             background: '#333',
+                             color: '#fff',
+                         },
+                     })
+               
+                 axios.post('http://localhost:5000/jwt', { uId }, { withCredentials: true })
+                     .then(res => {
+                         console.log(res.data);
+                     })
+
+
+             }
+
+             navigate(location?.state ? location.state : '/')
+         })
+         .catch(err => {
+             console.log(err);
+             toast.error(err.message,
+                 {
+                     style: {
+                         borderRadius: '10px',
+                         background: '#FF0',
+                         color: '#333',
+                     },
+                 });
+         })
+    }
     return (
         <div>
             <NavBar></NavBar>
@@ -70,6 +117,10 @@ const LogIn = () => {
                                 <button className="btn btn-accent">Login</button>
                             </div>
                             <p>Do not have an Account? <Link className="text-accent font-bold" to='/register'>register</Link></p>
+                            <div className="form-control ">
+                                <p className="text-center font-bold text-lg uppercase pb-5">Or</p>
+                                <button onClick={handleGoogle} className="btn btn-accent"><img className="w-8" src="https://i.ibb.co/mNSDXcs/search-1.png" alt="" /></button>
+                            </div>
                         </form>
                     </div>
                 </div>

@@ -15,24 +15,30 @@ const MyBookings = () => {
     const [date, seDate] = useState({})
     const [id, seId] = useState('')
     const [Delete , setDelete]=useState(true)
+
+
+console.log(id);
+    const [roomID,setRoomId] =useState({})
+    const [dateID,setDateId] =useState({})
+
+
+
+
     useEffect(() => {
-        fetch(`http://localhost:5000/bookingData/${uId}`)
-            .then(res => res.json())
-            .then(data => setBooked(data))
+        axios.get(`http://localhost:5000/bookingData/${uId}`,{withCredentials:true})
+            .then(res => setBooked(res.data))
     }, [uId])
 
+    const handleDelete = () => {
 
-    const handleDelete = (id, newDate) => {
-        console.log(id, newDate);
+        // console.log(roomID,newDate);
         today.setDate(today.getDate() + 1)
 
-        if (today.toISOString().split('T')[0] < newDate) {
-
-            console.log('delete');
-            axios.delete(`http://localhost:5000/bookingData/delete/${id}`)
+        if (today.toISOString().split('T')[0] < dateID) {
+            axios.delete(`http://localhost:5000/bookingData/delete/${roomID}`)
             .then(res => {
                 if (res.data.deletedCount) {
-                    const newData = bookedData.filter(booked => booked._id != id)
+                    const newData = bookedData.filter(booked => booked._id != roomID)
 
                     setBooked(newData)
                     toast.success('Cancel Booking Success',
@@ -49,13 +55,23 @@ const MyBookings = () => {
                 console.log(err);
             })
         }
-        else {
+        else  {
             setDelete(false)
         
         }
 
 
     }
+
+
+   
+    console.log(roomID,dateID);
+    const handleNewDelete=(Id, dateID)=>{
+       setRoomId(Id)
+       setDateId(dateID)
+
+    }
+
     const handleUpdate = (id) => {
         axios.put(`http://localhost:5000/booking/update/${id}`, { date })
             .then(res => {
@@ -81,8 +97,12 @@ const MyBookings = () => {
             })
     }
 
+   const handleRefresh=()=>[
+    setDelete(true)
+   ]
+
     const confirm = bookedData.some(book => book.date == date && book._id == id)
-    console.log(date.length);
+    
     return (
         <div className="min-h-[50vh] max-w-7xl mx-auto ">
 
@@ -106,8 +126,9 @@ const MyBookings = () => {
                                         <p className="capitalize text-lg font-semibold" >price: ${book.price}</p>
 
                                         <div className="card-actions flex justify-between">
-                                            <input className="btn btn-accent mb-2 w-36" onBlur={() => seId(book._id)} onClick={() => document.getElementById('update').showModal()} value='Update date' />
-                                            <button className="btn btn-accent" onClick={() => document.getElementById('delete').showModal()}>Cancel booking</button>
+                                            <input className="btn btn-accent mb-2 w-36" onBlur={() => seId(book._id)} onClick={() => document.getElementById('update').showModal()} value='Update date' readOnly />
+
+                                            <input className="btn w-40 btn-accent" onBlur={()=>handleNewDelete(book._id, book.date)} onClick={() => document.getElementById('delete').showModal()} value='Cancel booking' readOnly/>
                                         </div>
                                         <dialog id="delete" className="modal ">
                                             <div className="modal-box">
@@ -116,10 +137,11 @@ const MyBookings = () => {
                                                 {
                                                     Delete?  <p className="text-lg capitalize pt-2 text-center">your booking will be Cancel </p>: <p className="text-red-600 text-lg capitalize text-center  font-bold">Can not cancel today. <br /> Only can cancel a booking before 1 day from the booked date</p>
                                                 }
+
                                                 <div className="modal-action">
                                                     <form method="dialog">
                                                         {/* if there is a button in form, it will close the modal */}
-                                                        <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                                                        <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 " onClick={handleRefresh}>✕</button>
                                                     </form>
                                                 </div>
                                                 <div className="text-center">

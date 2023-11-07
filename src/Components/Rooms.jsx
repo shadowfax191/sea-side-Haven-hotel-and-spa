@@ -1,4 +1,6 @@
+/* eslint-disable no-constant-condition */
 
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
 
@@ -30,9 +32,8 @@ const Rooms = () => {
     }, [sortOrder])
 
     useEffect(() => {
-        fetch('http://localhost:5000/reviewData')
-            .then(res => res.json())
-            .then(data => setReview(data))
+        axios.get(`http://localhost:5000/reviewData`,{withCredentials:true})
+        .then(res => setReview(res.data))
     }, [])
 
     console.log(reviewData);
@@ -55,20 +56,22 @@ const Rooms = () => {
                                 <div className="p-7 space-y-3">
                                     <h2 className="card-title">{room?.category}</h2>
 
-                                   <div className="flex  justify-end  gap-2">
-                                   <img className="w-10" src="https://i.ibb.co/D1ntZ9n/tag.png" alt="" />
-                                    <p className="pb-3 text-right font-bold text-lg">Price: ${room.pricePerNight}</p>
-                                   </div>
+                                    <div className="flex  justify-end  gap-2">
+                                        <img className="w-10" src="https://i.ibb.co/D1ntZ9n/tag.png" alt="" />
+                                        <p className="pb-3 text-right font-bold text-lg">Price: ${room.pricePerNight}</p>
+                                    </div>
 
 
                                     <div className="flex gap-2 items-center ">
                                         <img className="w-10" src="https://i.ibb.co/fdz9hQd/reviews.png" alt="" />
                                         <p className="text-lg font-bold">Total Reviews: {
-                                            reviewData.filter(review => review.roomId == room._id).length
-
-                                        } </p>
-
+                                                    reviewData.length>0 ?
+                                                    <p>{ reviewData?.filter(review => review.roomId == room._id).length}</p>:
+                                                    <p className="text-base">log in to see Total Reviews</p>
+                                        }
+                                         </p>
                                     </div>
+
                                 </div>
 
                             </div></Link>
