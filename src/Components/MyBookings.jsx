@@ -3,6 +3,7 @@ import { AuthContext } from "../Provider/AuthProvider";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
+import moment from "moment";
 
 
 
@@ -11,64 +12,63 @@ const MyBookings = () => {
     const [bookedData, setBooked] = useState([])
     const { user } = useContext(AuthContext)
     const uId = user.uid;
-    const today = new Date()
+    const today = moment().format().split('T')[0]
     const [date, seDate] = useState({})
     const [id, seId] = useState('')
-    const [Delete , setDelete]=useState(true)
+    const [Delete, setDelete] = useState(true)
 
 
-console.log(id);
-    const [roomID,setRoomId] =useState({})
-    const [dateID,setDateId] =useState({})
+    const [roomID, setRoomId] = useState({})
+    const [dateID, setDateId] = useState({})
 
 
 
+    const tomorrow = moment().add(1, 'days').format('YYYY-MM-DD');
+
+    console.log(today);
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/bookingData/${uId}`,{withCredentials:true})
+        axios.get(`http://localhost:5000/bookingData/${uId}`, { withCredentials: true })
             .then(res => setBooked(res.data))
     }, [uId])
 
     const handleDelete = () => {
 
         // console.log(roomID,newDate);
-        today.setDate(today.getDate() + 1)
+       
 
-        if (today.toISOString().split('T')[0] < dateID) {
+        if (tomorrow < dateID) {
             axios.delete(`http://localhost:5000/bookingData/delete/${roomID}`)
-            .then(res => {
-                if (res.data.deletedCount) {
-                    const newData = bookedData.filter(booked => booked._id != roomID)
+                .then(res => {
+                    if (res.data.deletedCount) {
+                        const newData = bookedData.filter(booked => booked._id != roomID)
 
-                    setBooked(newData)
-                    toast.success('Cancel Booking Success',
-                        {
-                            style: {
-                                borderRadius: '10px',
-                                background: '#DC143C',
-                                color: '#fff',
-                            },
-                        })
-                }
-            })
-            .catch(err => {
-                console.log(err);
-            })
+                        setBooked(newData)
+                        toast.success('Cancel Booking Success',
+                            {
+                                style: {
+                                    borderRadius: '10px',
+                                    background: '#DC143C',
+                                    color: '#fff',
+                                },
+                            })
+                    }
+                })
+                .catch(err => {
+                    console.log(err);
+                })
         }
-        else  {
+        else {
             setDelete(false)
-        
+
         }
 
 
     }
 
-
-   
-    console.log(roomID,dateID);
-    const handleNewDelete=(Id, dateID)=>{
-       setRoomId(Id)
-       setDateId(dateID)
+    const handleNewDelete = (Id, dateID) => {
+        setRoomId(Id)
+        setDateId(dateID)
 
     }
 
@@ -82,10 +82,10 @@ console.log(id);
                                 borderRadius: '10px',
                                 background: '#FF0000',
                                 color: '#fff',
-                              
+
                             },
                         })
-                     
+
 
                     setTimeout(() => {
                         window.location.reload()
@@ -97,12 +97,12 @@ console.log(id);
             })
     }
 
-   const handleRefresh=()=>[
-    setDelete(true)
-   ]
+    const handleRefresh = () => [
+        setDelete(true)
+    ]
 
     const confirm = bookedData.some(book => book.date == date && book._id == id)
-    
+
     return (
         <div className="min-h-[50vh] max-w-7xl mx-auto ">
 
@@ -128,14 +128,14 @@ console.log(id);
                                         <div className="card-actions flex justify-between">
                                             <input className="btn btn-accent mb-2 w-36" onBlur={() => seId(book._id)} onClick={() => document.getElementById('update').showModal()} value='Update date' readOnly />
 
-                                            <input className="btn w-40 btn-accent" onBlur={()=>handleNewDelete(book._id, book.date)} onClick={() => document.getElementById('delete').showModal()} value='Cancel booking' readOnly/>
+                                            <input className="btn w-40 btn-accent" onBlur={() => handleNewDelete(book._id, book.date)} onClick={() => document.getElementById('delete').showModal()} value='Cancel booking' readOnly />
                                         </div>
                                         <dialog id="delete" className="modal ">
                                             <div className="modal-box">
                                                 <h3 className="font-bold text-lg text-center">Confirm Cancel</h3>
-                                               
+
                                                 {
-                                                    Delete?  <p className="text-lg capitalize pt-2 text-center">your booking will be Cancel </p>: <p className="text-red-600 text-lg capitalize text-center  font-bold">Can not cancel today. <br /> Only can cancel a booking before 1 day from the booked date</p>
+                                                    Delete ? <p className="text-lg capitalize pt-2 text-center">your booking will be Cancel </p> : <p className="text-red-600 text-lg capitalize text-center  font-bold">Can not cancel today. <br /> Only can cancel a booking before 1 day from the booked date</p>
                                                 }
 
                                                 <div className="modal-action">
@@ -154,7 +154,7 @@ console.log(id);
                                             <div className="modal-box text-center">
                                                 <h3 className="font-bold text-lg text-center capitalize">update date</h3>
                                                 <p className="text-lg capitalize pt-2 text-center">plz update date by clicking the date </p>
-                                                <input className="input input-accent my-2" onChange={(e) => seDate(e.target.value)} type="date" min={today.toISOString().split('T')[0]} />
+                                                <input className="input input-accent my-2" onChange={(e) => seDate(e.target.value)} type="date" min={today} />
                                                 {
                                                     confirm ? <p>Already Booked on this date</p>
 

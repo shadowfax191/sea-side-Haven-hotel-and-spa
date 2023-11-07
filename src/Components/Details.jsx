@@ -3,6 +3,7 @@ import { useLoaderData } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
 import axios from "axios";
 import toast from "react-hot-toast";
+import moment from "moment/moment";
 
 
 const Details = () => {
@@ -10,14 +11,16 @@ const Details = () => {
     const { user } = useContext(AuthContext)
     const images = detail.roomImages
     const [bookingData, setBooking] = useState({})
-    const today = new Date()
-    const [date, setDate] = useState(today.toISOString().split('T')[0])
+  
+    const [date, setDate] = useState(moment().format().split('T')[0])
     const [bookedData, setBooked] = useState([])
     const [acc, setAcc] = useState(false)
     const [reviewData, setReview] = useState([])
 
-   
 
+
+
+    const confirm = bookedData.some(book => book.date == date && book.roomId == detail._id)
 
     useEffect(() => {
         axios.get(`http://localhost:5000/bookingData`,{withCredentials:true})
@@ -215,7 +218,7 @@ const Details = () => {
 
                     <div className="flex items-center justify-center gap-3">
                         <h1>Check Available Room:</h1>
-                        <input onChange={(e) => setDate(e.target.value)} type="date" defaultValue={today.toISOString().split('T')[0]} required className="input input-accent" min={today.toISOString().split('T')[0]} />
+                        <input onChange={(e) => setDate(e.target.value)} type="date" defaultValue={moment().format().split('T')[0]} required className="input input-accent" min={moment().format().split('T')[0]} />
                     </div>
                     <div className="flex justify-center pt-4">
                         {confirm ? <button className="btn btn-accent" disabled="disabled">Book Now</button> :
@@ -340,7 +343,7 @@ const Details = () => {
                                         <p>Comment</p>
                                         <input type="text" placeholder="comment" name="comment" className="input input-bordered input-accent w-full max-w-xs" />
                                         <p>date</p>
-                                        <input type="date" placeholder="rating" name="date" value={today.toISOString().split('T')[0]} readOnly className="input input-bordered input-accent w-full max-w-xs" />
+                                        <input type="date" placeholder="rating" name="date" value={moment().format().split('T')[0]} readOnly className="input input-bordered input-accent w-full max-w-xs" />
 
                                         <div className="p-4 flex justify-center">
                                             <input type="submit" value='Submit Review' className="btn btn-accent " />
