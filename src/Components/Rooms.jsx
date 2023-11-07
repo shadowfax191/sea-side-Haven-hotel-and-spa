@@ -35,18 +35,12 @@ const Rooms = () => {
             .then(data => setReview(data))
     }, [])
 
-
-    // const confirm = reviewData.filter((review)=>{
-    //         return dataLoad.filter((room) => {
-    //        return  review.roomId == room._id} )
-
-    // })
     console.log(reviewData);
 
     return (
         <div className="max-w-7xl mx-auto py-10 px-5">
             <div className="flex justify-end pb-5 px-4">
-                <select className=" border-solid border-accent border-2" value={sortOrder} onChange={(e) => SetSortOrder(e.target.value)} >
+                <select className=" w-56 h-10 border-solid border-accent border-2" value={sortOrder} onChange={(e) => SetSortOrder(e.target.value)} >
                     <option value="default">Default</option>
                     <option value="asc">Low to High</option>
                     <option value="dsc">High to Low</option>
@@ -58,10 +52,16 @@ const Rooms = () => {
                         <div key={room.id}>
                             <Link to={`/details/${room?._id}`}><div className="card w-full glass">
                                 <figure><img className="h-64 w-full" src={room.displayImage} alt="car!" /></figure>
-                                <div className="card-body">
+                                <div className="p-7 space-y-3">
                                     <h2 className="card-title">{room?.category}</h2>
-                                    <p className="pb-3 text-right text-accent font-bold text-lg">$ {room.pricePerNight}</p>
-                                    <div className="flex gap-2 items-center">
+
+                                   <div className="flex  justify-end  gap-2">
+                                   <img className="w-10" src="https://i.ibb.co/D1ntZ9n/tag.png" alt="" />
+                                    <p className="pb-3 text-right font-bold text-lg">Price: ${room.pricePerNight}</p>
+                                   </div>
+
+
+                                    <div className="flex gap-2 items-center ">
                                         <img className="w-10" src="https://i.ibb.co/fdz9hQd/reviews.png" alt="" />
                                         <p className="text-lg font-bold">Total Reviews: {
                                             reviewData.filter(review => review.roomId == room._id).length

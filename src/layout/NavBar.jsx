@@ -26,7 +26,7 @@ const NavBar = () => {
         <li><NavLink to='/roomBookings' className={({ isActive }) => isActive ? 'btn btn-outline text-black btn-sm' : ''}>My Bookings</NavLink></li>
     </>
     return (
-        <div>
+        <div >
             <div className=" bg-accent text-black">
                 <div className="navbar max-w-[1500px] mx-auto py-5">
                     <div className="navbar-start">

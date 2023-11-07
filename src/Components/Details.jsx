@@ -170,26 +170,37 @@ const Details = () => {
                                 </form>
                                 <h3 className="font-bold text-lg">Reviews of {detail.category}</h3>
 
-                                {
-                                    reviewData.filter(review => review.roomId == detail._id).map(review =>
-                                        <div key={review._id} className="p-4 border-solid border-b-2 border-accent">
-                                            <div className="flex items-center font-bold text-2xl gap-2 capitalize">
-                                                <img className="w-10" src="https://i.ibb.co/GCNcx9r/profile.png" alt="" />
-                                                <p>{review.name}</p>
-                                            </div>
-                                            <p className="py-2">Date: {review.time}</p>
-                                            <div className="rating rating-md ">
-                                                {
-                                                    [1, 2, 3, 4, 5].map((a, index) => (
-                                                        <input key={index} type="radio" name={`rating-${review._id}`} className="mask mask-star-2 bg-accent " checked={a <= review.rating} readOnly />
-                                                    ))
-                                                }
+                                { 
+                                    reviewData.filter(review => review.roomId == detail._id).length>0?
+                                      <div>
+                                        {
+                                              reviewData.filter(review => review.roomId == detail._id).map(review =>
+                                                <div key={review._id} className="p-4 border-solid border-b-2 border-accent">
+                                                    <div className="flex items-center font-bold text-2xl gap-2 capitalize">
+                                                        <img className="w-10" src="https://i.ibb.co/GCNcx9r/profile.png" alt="" />
+                                                        <p>{review.name}</p>
+                                                    </div>
+                                                    <p className="py-2">Date: {review.time}</p>
+                                                    <div className="rating rating-md ">
+                                                        {
+                                                            [1, 2, 3, 4, 5].map((a, index) => (
+                                                                <input key={index} type="radio" name={`rating-${review._id}`} className="mask mask-star-2 bg-accent " checked={a <= review.rating} readOnly />
+                                                            ))
+                                                        }
+        
+                                                    </div>
+                                                    <p className="text-xl capitalize"><span className="text-lg font-bold">Comment:</span> {review.comment}</p>
+                                                </div> )
+                                        }
+                                      </div>
+                                         :
+                                         <div className="text-2xl font-bold capitalize pt-4">
+                                             <p>there is no review for this room</p>
+                                         </div>
+                                        
 
-                                            </div>
-                                            <p className="text-xl capitalize"><span className="text-lg font-bold">Comment:</span> {review.comment}</p>
-                                        </div>
-
-                                    )
+                                   
+                                   
 
                                 }
                             </div>
