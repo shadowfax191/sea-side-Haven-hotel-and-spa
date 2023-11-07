@@ -1,5 +1,5 @@
 
-import {  useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
 
 
@@ -9,7 +9,7 @@ const Rooms = () => {
     const dataLoad = useLoaderData()
     const [roomData, setRoomData] = useState([])
     const [sortOrder, SetSortOrder] = useState('default')
-    // const [bookedData, setBooked] = useState([])
+    const [reviewData, setReview] = useState([])
     // const {user}=useContext(AuthContext)
     useEffect(() => {
         if (sortOrder === 'default') {
@@ -26,24 +26,22 @@ const Rooms = () => {
                 }
             })
             return setRoomData(newData)
-        } 
+        }
     }, [sortOrder])
 
-    // useEffect(() => {
-    //     fetch('http://localhost:5000/bookingData')
-    //         .then(res => res.json())
-    //         .then(data => setBooked(data))
-    // }, [])
+    useEffect(() => {
+        fetch('http://localhost:5000/reviewData')
+            .then(res => res.json())
+            .then(data => setReview(data))
+    }, [])
 
 
-    // const confirm = bookedData.find((book)=>{
-    //         return dataLoad.find((room) => {
-    //        return book.useId == user._id && book.roomId == room._id} )
+    // const confirm = reviewData.filter((review)=>{
+    //         return dataLoad.filter((room) => {
+    //        return  review.roomId == room._id} )
 
     // })
-    // // (book => book.useId == user._id && book.roomId == dataLoad._id )
-    // console.log(confirm);
-    // // console.log(dataLoad);
+    console.log(reviewData);
 
     return (
         <div className="max-w-7xl mx-auto py-10 px-5">
@@ -63,11 +61,16 @@ const Rooms = () => {
                                 <div className="card-body">
                                     <h2 className="card-title">{room?.category}</h2>
                                     <p className="pb-3 text-right text-accent font-bold text-lg">$ {room.pricePerNight}</p>
-                                    <div>
-                              
+                                    <div className="flex gap-2 items-center">
+                                        <img className="w-10" src="https://i.ibb.co/fdz9hQd/reviews.png" alt="" />
+                                        <p className="text-lg font-bold">Total Reviews: {
+                                            reviewData.filter(review => review.roomId == room._id).length
+
+                                        } </p>
+
+                                    </div>
                                 </div>
-                                </div>
-                               
+
                             </div></Link>
                         </div>
                     )

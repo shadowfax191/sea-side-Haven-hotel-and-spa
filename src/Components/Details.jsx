@@ -14,15 +14,22 @@ const Details = () => {
     const [date, setDate] = useState(today.toISOString().split('T')[0])
     const [bookedData, setBooked] = useState([])
     const [acc, setAcc] = useState(false)
+    const [reviewData, setReview] = useState([])
+
     const confirm = bookedData.some(book => book.date == date && book.roomId == detail._id)
 
-    
+
     useEffect(() => {
         fetch('http://localhost:5000/bookingData')
             .then(res => res.json())
             .then(data => setBooked(data))
     }, [])
 
+    useEffect(() => {
+        fetch('http://localhost:5000/reviewData')
+            .then(res => res.json())
+            .then(data => setReview(data))
+    }, [])
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -76,55 +83,121 @@ const Details = () => {
         const rating = e.target.rating.value
         const comment = e.target.comment.value
         const time = e.target.date.value
+        const roomId = detail._id
+        const userId = user.uid
+        const review = { name, rating, comment, time, roomId, userId }
 
-        const review = { name, rating, comment, time }
+        axios.post('http://localhost:5000/reviewData', review)
+            .then(res => {
+                if (res.data.acknowledged) {
+                    toast.success('Review complete',
+                        {
+                            style: {
+                                borderRadius: '10px',
+                                background: '#333',
+                                color: '#fff',
+                            },
+                        })
+                    window.location.reload()
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            })
 
-        axios.post('http://localhost:5000/reviewData',review)
-        .then(res=>{
-            if (res.data.acknowledged) {
-                toast.success('Review complete',
-                    {
-                        style: {
-                            borderRadius: '10px',
-                            background: '#333',
-                            color: '#fff',
-                        },
-                    })
-                window.location.reload()   
-            }
-        })
-        .catch(err => {
-            console.log(err);
-        })
-      
     }
 
     return (
         <div>
+            {/* banner */}
+
             <div className="hero min-h-[60vh] " style={{ backgroundImage: `url(${detail?.displayImage})` }}>
                 <div className="hero-overlay bg-opacity-70"></div>
                 <div className="hero-content text-center text-neutral-content">
                     <div className="max-w-md">
                         <h1 className="mb-5 text-5xl font-bold">{detail?.category}</h1>
                         <p className="mb-5">Indulge in the luxurious experience of your stay within the opulent confines of our {detail.category} room.</p>
-
                     </div>
                 </div>
             </div>
+
+            {/* Room Description    */}
             <div className="max-w-7xl mx-auto mt-10 flex flex-col lg:flex-row  gap-5 mb-5">
+                {/* des */}
                 <div className="space-y-2 flex-1 border-solid border-r-2 border-accent  p-5">
                     <h2 className="text-4xl font-bold text-accent text-center">ROOM DESCRIPTION</h2>
-                    <p className="text-2xl md:text-3xl pb-5">{detail?.description}</p>
+                    <p className="text-xl md:text-2 xl pb-5">{detail?.description}</p>
                     <div className="grid grid-cols-2 text-lg gap-4 p-3 font-medium">
-                        <p>Price: ${detail?.pricePerNight}</p>
-                        <p>Room Size: {detail?.roomSize}</p>
-                        <p>Seat: {confirm ? `${detail.seat - 1}` : `${detail.seat}`}</p>
-                        <p>Available: <span className="font-bold ">{confirm ? 'No Available Room. Try different date.' : 'Available'}</span></p>
+                        <div className="flex items-center gap-2">
+                            <img className="w-10" src="https://i.ibb.co/D1ntZ9n/tag.png" alt="" />
+                            <p>Price: ${detail?.pricePerNight}</p>
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <img className="w-10" src="https://i.ibb.co/z47Mxp7/house-size.png" alt="" />
+                            <p>Room Size: {detail?.roomSize}</p>
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <img className="w-10" src="https://i.ibb.co/BzH52CY/seats.png" alt="" />
+                            <p>Seat: {confirm ? `${detail.seat - 1}` : `${detail.seat}`}</p>
+                        </div>
 
-                        <p>Special Offer: {detail?.specialOffers}</p>
+                        {/* Check available */}
 
+                        <div className="flex items-center gap-3">
+                            <div>
+                                {
+                                    confirm ? <img className="w-16" src="https://i.ibb.co/zGqD3GC/not-available-circle.png" alt="" /> : <img className="w-10" src="https://i.ibb.co/PgK8j2s/available.png" alt="" />
+                                }
+                            </div>
 
+                            <p>Available: <span className="font-bold ">{confirm ? 'No Available Room. Try different date.' : 'Available'}</span></p>
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <img className="w-10" src="https://i.ibb.co/vHP6nnr/ribbon.png" alt="" />
+                            <p>Special Offer: {detail?.specialOffers}</p>
+                        </div>
                     </div>
+
+                    {/* Review   */}
+
+                    <div className="">
+                        <button className="btn btn-accent capitalize " onClick={() => document.getElementById('review').showModal()}>Check our Customer Reviews <img className="w-5" src="https://i.ibb.co/tskjk9B/rating.png" alt="" /> </button>
+                        <dialog id="review" className="modal ">
+                            <div className="modal-box">
+                                <form method="dialog">
+                                    {/* if there is a button in form, it will close the modal */}
+                                    <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                                </form>
+                                <h3 className="font-bold text-lg">Reviews of {detail.category}</h3>
+
+                                {
+                                    reviewData.filter(review => review.roomId == detail._id).map(review =>
+                                        <div key={review._id} className="p-4 border-solid border-b-2 border-accent">
+                                            <div className="flex items-center font-bold text-2xl gap-2 capitalize">
+                                                <img className="w-10" src="https://i.ibb.co/GCNcx9r/profile.png" alt="" />
+                                                <p>{review.name}</p>
+                                            </div>
+                                            <p className="py-2">Date: {review.time}</p>
+                                            <div className="rating rating-md ">
+                                                {
+                                                    [1, 2, 3, 4, 5].map((a, index) => (
+                                                        <input key={index} type="radio" name={`rating-${review._id}`} className="mask mask-star-2 bg-accent " checked={a <= review.rating} readOnly />
+                                                    ))
+                                                }
+
+                                            </div>
+                                            <p className="text-xl capitalize"><span className="text-lg font-bold">Comment:</span> {review.comment}</p>
+                                        </div>
+
+                                    )
+
+                                }
+                            </div>
+                        </dialog>
+                    </div>
+
+                    {/* check date */}
+
                     <div className="flex items-center justify-center gap-3">
                         <h1>Check Available Room:</h1>
                         <input onChange={(e) => setDate(e.target.value)} type="date" defaultValue={today.toISOString().split('T')[0]} required className="input input-accent" min={today.toISOString().split('T')[0]} />
@@ -134,6 +207,7 @@ const Details = () => {
                             <button className="btn btn-accent" onClick={() => document.getElementById('my_modal_5').showModal()}>Book Now</button>}
                     </div>
                 </div>
+                {/* carousel */}
                 <div className="carousel w-full flex-1">
                     {
                         images.map((image, index) =>
@@ -150,11 +224,17 @@ const Details = () => {
                         )}
                 </div>
             </div>
+
+
+            {/* Booking  */}
             <dialog id="my_modal_5" className="modal ">
                 <div className="modal-box">
                     <h3 className="font-bold text-lg">Information of Booking for {detail?.category}</h3>
 
                     <div className="">
+
+                        {/* booking Information */}
+
                         <form onSubmit={handleSubmit}>
                             <div className="form-control">
                                 <label className="label">
@@ -225,6 +305,9 @@ const Details = () => {
                         </form>
                         <dialog id="my_modal_4" className="modal">
                             {acc ?
+
+                                //    User review
+
                                 <div className="modal-box">
                                     <h3 className="font-bold text-lg">Thank You for choosing us</h3>
                                     <h3 className="font-bold text-xl">Review Our Service</h3>
@@ -245,6 +328,9 @@ const Details = () => {
 
                                 </div>
                                 :
+
+                                // Confirm
+
                                 <div className="modal-box">
                                     <form method="dialog">
 
