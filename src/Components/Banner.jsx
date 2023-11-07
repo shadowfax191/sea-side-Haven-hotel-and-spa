@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-
+import { motion } from "framer-motion"
 const Banner = () => {
   return (
     <div className="">
@@ -10,12 +10,38 @@ const Banner = () => {
             <div className="hero-content text-center text-neutral-content">
               <div className="hero">
                 <div className="hero-content flex-col lg:flex-row">
-                  <img src="https://i.ibb.co/yS58ftC/Oceanview-Room.jpg" className="max-w-sm md:max-w-lg rounded-lg shadow-2xl" />
-                  <div>
-                    <h1 className="text-5xl font-bold ">Special <span className="text-accent">offers</span> </h1>
-                    <p className="py-6 text-lg font-medium">Indulge in the serenity of our captivating beach view rooms with an exclusive discount, unlocked upon your very first login.</p>
-                    <Link to='/login'><button className="btn btn-outline btn-accent">Log in now</button></Link>
-                  </div>
+                  <motion.div
+                    initial={{ x: -200,Y:0, scale: 0.2 }}
+                    animate={{ x: 0, y: 0, scale: 1 }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 100,
+                      damping: 15,
+                      duration:2,
+                      delay:1
+                    }}
+                  >
+                    <img src="https://i.ibb.co/yS58ftC/Oceanview-Room.jpg" className="max-w-sm md:max-w-lg rounded-lg shadow-2xl" />
+                    </motion.div>
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 100,
+                      damping: 15,
+                      delay: 1,
+                      duration: 1
+                    }}
+
+                  > <div>
+                      <h1 className="text-5xl font-bold ">Special <span className="text-accent">offers</span> </h1>
+                      <p className="py-6 text-lg font-medium">Indulge in the serenity of our captivating beach view rooms with an exclusive discount, unlocked upon your very first login.</p>
+                      <Link to='/login'><button className="btn btn-outline btn-accent">Log in now</button></Link>
+
+
+                    </div></motion.div>
+
                 </div>
               </div>
             </div>
