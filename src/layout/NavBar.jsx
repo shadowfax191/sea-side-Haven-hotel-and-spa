@@ -40,6 +40,7 @@ const NavBar = () => {
                                 }
                             </ul>
                         </div>
+                        <img  className="w-14" src="https://i.ibb.co/G31KM8p/review.png" alt="" />
                         <a className="btn btn-ghost normal-case text-sm md:text-xl">Seaside Haven Hotel & Spa</a>
                     </div>
                     <div className="navbar-center hidden lg:flex">

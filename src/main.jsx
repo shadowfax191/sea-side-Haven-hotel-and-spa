@@ -16,6 +16,8 @@ import { Toaster } from 'react-hot-toast';
 import PrivateRoute from './Components/PrivateRoute.jsx';
 import Details from './Components/Details.jsx';
 import ErrorPage from './Components/ErrorPage.jsx/ErrorPage.jsx';
+import AboutUs from './Components/optional/AboutUs.jsx';
+import Gallery from './Components/optional/Gallery.jsx';
 
 const router = createBrowserRouter([
   {
@@ -41,6 +43,14 @@ const router = createBrowserRouter([
         path: "/details/:id",
         element: <PrivateRoute><Details></Details></PrivateRoute> ,
         loader:({params})=>fetch(`http://localhost:5000/rooms/${params.id}`)
+      },
+      {
+        path: "/aboutUs",
+        element:<AboutUs></AboutUs>,
+      },
+      {
+        path: "/gallery",
+        element:<Gallery></Gallery>,
       },
     ]
   },

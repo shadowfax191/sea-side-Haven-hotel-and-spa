@@ -11,14 +11,14 @@ const Banner = () => {
               <div className="hero">
                 <div className="hero-content flex-col lg:flex-row">
                   <motion.div
-                    initial={{ x: -200,Y:0, scale: 0.2 }}
+                    initial={{ x: -200,Y:0, scale: 0 }}
                     animate={{ x: 0, y: 0, scale: 1 }}
                     transition={{
-                      type: "spring",
+                      type: "easeIn",
                       stiffness: 100,
                       damping: 15,
                       duration:2,
-                      delay:1
+                   
                     }}
                   >
                     <img src="https://i.ibb.co/yS58ftC/Oceanview-Room.jpg" className="max-w-sm md:max-w-lg rounded-lg shadow-2xl" />
@@ -31,7 +31,7 @@ const Banner = () => {
                       stiffness: 100,
                       damping: 15,
                       delay: 1,
-                      duration: 1
+                      duration: 2,
                     }}
 
                   > <div>
