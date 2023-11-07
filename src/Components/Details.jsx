@@ -98,7 +98,11 @@ const Details = () => {
                                 color: '#fff',
                             },
                         })
-                    window.location.reload()
+
+                    setTimeout(() => {
+                        window.location.reload()
+                    }, 1000);
+                  
                 }
             })
             .catch(err => {
@@ -122,10 +126,12 @@ const Details = () => {
             </div>
 
             {/* Room Description    */}
+          
             <div className="max-w-7xl mx-auto mt-10 flex flex-col lg:flex-row  gap-5 mb-5">
                 {/* des */}
                 <div className="space-y-2 flex-1 border-solid border-r-2 border-accent  p-5">
                     <h2 className="text-4xl font-bold text-accent text-center">ROOM DESCRIPTION</h2>
+                   
                     <p className="text-xl md:text-2 xl pb-5">{detail?.description}</p>
                     <div className="grid grid-cols-2 text-lg gap-4 p-3 font-medium">
                         <div className="flex items-center gap-2">
