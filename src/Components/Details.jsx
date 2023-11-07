@@ -16,7 +16,7 @@ const Details = () => {
     const [acc, setAcc] = useState(false)
     const [reviewData, setReview] = useState([])
 
-    const confirm = bookedData.some(book => book.date == date && book.roomId == detail._id)
+   
 
 
     useEffect(() => {
