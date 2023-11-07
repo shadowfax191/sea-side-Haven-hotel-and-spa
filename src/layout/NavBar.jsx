@@ -5,25 +5,29 @@ import toast from "react-hot-toast";
 
 const NavBar = () => {
 
-    const {user,logOut}=useContext(AuthContext)
+    const { user, logOut } = useContext(AuthContext)
 
-  const handleLogout=()=> {
+    const handleLogout = () => {
 
-    logOut()
-    .then(toast.success('Successfully LogOut Complete ',
-    {
-      style: {
-        borderRadius: '10px',
-        background: '#333',
-        color: '#fff',
-      },
-    }))
-  }
+        logOut()
+            .then(toast.success('Successfully LogOut Complete ',
+                {
+                    style: {
+                        borderRadius: '10px',
+                        background: '#333',
+                        color: '#fff',
+                    },
+                }))
+    }
 
     const links = <>
         <li><NavLink to='/' className={({ isActive }) => isActive ? 'btn btn-outline text-black btn-sm' : ''}>Home</NavLink></li>
         <li><NavLink to='/rooms' className={({ isActive }) => isActive ? 'btn btn-outline text-black  btn-sm' : ''}>Rooms</NavLink></li>
         <li><NavLink to='/roomBookings' className={({ isActive }) => isActive ? 'btn btn-outline text-black btn-sm' : ''}>My Bookings</NavLink></li>
+        <li><NavLink to='/aboutUs' className={({ isActive }) => isActive ? 'btn btn-outline text-black btn-sm' : ''}>About Us</NavLink></li>
+        <li><NavLink to='/gallery' className={({ isActive }) => isActive ? 'btn btn-outline text-black btn-sm' : ''}>Gallery</NavLink></li>
+
+
     </>
     return (
         <div >
@@ -40,7 +44,7 @@ const NavBar = () => {
                                 }
                             </ul>
                         </div>
-                        <img  className="w-14" src="https://i.ibb.co/G31KM8p/review.png" alt="" />
+                        <img className="w-14" src="https://i.ibb.co/G31KM8p/review.png" alt="" />
                         <a className="btn btn-ghost normal-case text-sm md:text-xl">Seaside Haven Hotel & Spa</a>
                     </div>
                     <div className="navbar-center hidden lg:flex">
@@ -51,13 +55,13 @@ const NavBar = () => {
                         </ul>
                     </div>
                     <div className="navbar-end">
-                            {
-                                user?
+                        {
+                            user ?
                                 <button onClick={handleLogout} className="btn btn-outline text-black">logout</button>
                                 :
                                 <Link to='/login' className="btn btn-outline text-black">login</Link>
-                            }
-                        
+                        }
+
                     </div>
                 </div>
             </div>
