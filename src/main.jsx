@@ -15,11 +15,13 @@ import AuthProvider from './Provider/AuthProvider.jsx';
 import { Toaster } from 'react-hot-toast';
 import PrivateRoute from './Components/PrivateRoute.jsx';
 import Details from './Components/Details.jsx';
+import ErrorPage from './Components/ErrorPage.jsx/ErrorPage.jsx';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root></Root>,
+    errorElement:<ErrorPage></ErrorPage>,
     children: [
       {
         index:true,

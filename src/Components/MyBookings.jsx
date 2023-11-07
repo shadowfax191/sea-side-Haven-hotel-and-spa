@@ -13,9 +13,8 @@ const MyBookings = () => {
     const uId = user.uid;
     const today = new Date()
     const [date, seDate] = useState({})
-    const [id, seId] = useState({})
-    console.log(date, id);
-
+    const [id, seId] = useState('')
+    const [Delete , setDelete]=useState(true)
     useEffect(() => {
         fetch(`http://localhost:5000/bookingData/${uId}`)
             .then(res => res.json())
@@ -23,33 +22,24 @@ const MyBookings = () => {
     }, [uId])
 
 
-    const handleDelete = (id) => {
+    const handleDelete = (id, newDate) => {
+        console.log(id, newDate);
+        today.setDate(today.getDate() + 1)
 
-        axios.delete(`http://localhost:5000/bookingData/delete/${id}`)
+        if (today.toISOString().split('T')[0] < newDate) {
+
+            console.log('delete');
+            axios.delete(`http://localhost:5000/bookingData/delete/${id}`)
             .then(res => {
                 if (res.data.deletedCount) {
                     const newData = bookedData.filter(booked => booked._id != id)
 
                     setBooked(newData)
-
-                }
-            })
-            .catch(err => {
-                console.log(err);
-            })
-
-
-    }
-    const handleUpdate = (id) => {
-        axios.put(`http://localhost:5000/booking/update/${id}`, { date })
-            .then(res => {
-                if (res.data.modifiedCount > 0) {
-                    window.location.reload()
-                    toast.success('Successfully Booking Complete ',
+                    toast.success('Cancel Booking Success',
                         {
                             style: {
                                 borderRadius: '10px',
-                                background: '#333',
+                                background: '#DC143C',
                                 color: '#fff',
                             },
                         })
@@ -58,10 +48,41 @@ const MyBookings = () => {
             .catch(err => {
                 console.log(err);
             })
+        }
+        else {
+            setDelete(false)
+        
+        }
+
+
+    }
+    const handleUpdate = (id) => {
+        axios.put(`http://localhost:5000/booking/update/${id}`, { date })
+            .then(res => {
+                if (res.data.modifiedCount > 0) {
+                    toast.success('Update booking date complete',
+                        {
+                            style: {
+                                borderRadius: '10px',
+                                background: '#FF0000',
+                                color: '#fff',
+                              
+                            },
+                        })
+                     
+
+                    setTimeout(() => {
+                        window.location.reload()
+                    }, 1000);
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            })
     }
 
     const confirm = bookedData.some(book => book.date == date && book._id == id)
-    console.log(confirm);
+    console.log(date.length);
     return (
         <div className="min-h-[50vh] max-w-7xl mx-auto ">
 
@@ -91,7 +112,10 @@ const MyBookings = () => {
                                         <dialog id="delete" className="modal ">
                                             <div className="modal-box">
                                                 <h3 className="font-bold text-lg text-center">Confirm Cancel</h3>
-                                                <p className="text-lg capitalize pt-2 text-center">your booking will be Cancel </p>
+                                               
+                                                {
+                                                    Delete?  <p className="text-lg capitalize pt-2 text-center">your booking will be Cancel </p>: <p className="text-red-600 text-lg capitalize text-center  font-bold">Can not cancel today. <br /> Only can cancel a booking before 1 day from the booked date</p>
+                                                }
                                                 <div className="modal-action">
                                                     <form method="dialog">
                                                         {/* if there is a button in form, it will close the modal */}
@@ -99,7 +123,7 @@ const MyBookings = () => {
                                                     </form>
                                                 </div>
                                                 <div className="text-center">
-                                                    <button className="btn btn-accent" onClick={() => { handleDelete(book._id) }}>Confirm Cancel booking</button>
+                                                    <button className="btn btn-accent" onClick={() => { handleDelete(book._id, book.date) }}>Confirm Cancel booking</button>
                                                 </div>
 
                                             </div>
@@ -113,7 +137,7 @@ const MyBookings = () => {
                                                     confirm ? <p>Already Booked on this date</p>
 
                                                         :
-                                                        <p></p>
+                                                        ''
                                                 }
 
                                                 <div className="modal-action">
@@ -122,16 +146,22 @@ const MyBookings = () => {
                                                         <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
                                                     </form>
                                                 </div>
-                                                <div className="text-center">
-                                                    {
-                                                        confirm ?
-                                                            <button className="btn btn-accent  " disabled="disabled" onClick={() => { handleUpdate(book._id) }}>Update date</button>
+                                                {
 
-                                                            :
+                                                    date.length > 0 ? <div className="text-center">
+                                                        {
+                                                            confirm ?
+                                                                <button className="btn btn-accent  " disabled="disabled" onClick={() => { handleUpdate(book._id) }}>Update date</button>
 
-                                                            <button className="btn btn-accent" onClick={() => { handleUpdate(book._id) }}>Update date</button>
-                                                    }
-                                                </div>
+                                                                :
+
+                                                                <button className="btn btn-accent" onClick={() => { handleUpdate(book._id) }}>Update date</button>
+                                                        }
+                                                    </div>
+                                                        :
+                                                        <button className="btn btn-accent  " disabled="disabled" >Update date</button>
+
+                                                }
 
                                             </div>
                                         </dialog>
@@ -142,7 +172,10 @@ const MyBookings = () => {
                         )}
                     </div>
                     :
-                    <div className="space-y-3 text-center capitalize m-5 ">
+                    <div className="space-y-3 text-center capitalize m-5 flex flex-col justify-center">
+                        <div className="flex justify-center">
+                            <img className="w-80 " src="https://i.ibb.co/Rpdc6Dt/no-data.png" alt="" />
+                        </div>
                         <h1 className="text-5xl font-bold pt-10">You Do not Have any Booking</h1>
                         <p className="text-xl">for booking Rooms, click blow </p>
 

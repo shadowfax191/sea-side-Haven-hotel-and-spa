@@ -63,13 +63,11 @@ const Details = () => {
                         {
                             style: {
                                 borderRadius: '10px',
-                                background: '#333',
+                                background: '#FF0000',
                                 color: '#fff',
                             },
                         })
-                    // setTimeout(() => {
-                    //     navigate('/roomBookings')
-                    // }, 1000);
+
                 }
             })
             .catch(err => {
@@ -90,11 +88,11 @@ const Details = () => {
         axios.post('http://localhost:5000/reviewData', review)
             .then(res => {
                 if (res.data.acknowledged) {
-                    toast.success('Review complete',
+                    toast.success('Review Complete',
                         {
                             style: {
                                 borderRadius: '10px',
-                                background: '#333',
+                                background: '#FF0000',
                                 color: '#fff',
                             },
                         })
@@ -102,7 +100,7 @@ const Details = () => {
                     setTimeout(() => {
                         window.location.reload()
                     }, 1000);
-                  
+
                 }
             })
             .catch(err => {
@@ -126,12 +124,12 @@ const Details = () => {
             </div>
 
             {/* Room Description    */}
-          
+
             <div className="max-w-7xl mx-auto mt-10 flex flex-col lg:flex-row  gap-5 mb-5">
                 {/* des */}
                 <div className="space-y-2 flex-1 border-solid border-r-2 border-accent  p-5">
                     <h2 className="text-4xl font-bold text-accent text-center">ROOM DESCRIPTION</h2>
-                   
+
                     <p className="text-xl md:text-2 xl pb-5">{detail?.description}</p>
                     <div className="grid grid-cols-2 text-lg gap-4 p-3 font-medium">
                         <div className="flex items-center gap-2">
@@ -174,39 +172,41 @@ const Details = () => {
                                     {/* if there is a button in form, it will close the modal */}
                                     <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
                                 </form>
-                                <h3 className="font-bold text-lg">Reviews of {detail.category}</h3>
+                                <h3 className="font-bold text-lg">Reviews of <span className="text-accent">{detail.category}</span></h3>
 
-                                { 
-                                    reviewData.filter(review => review.roomId == detail._id).length>0?
-                                      <div>
-                                        {
-                                              reviewData.filter(review => review.roomId == detail._id).map(review =>
-                                                <div key={review._id} className="p-4 border-solid border-b-2 border-accent">
-                                                    <div className="flex items-center font-bold text-2xl gap-2 capitalize">
-                                                        <img className="w-10" src="https://i.ibb.co/GCNcx9r/profile.png" alt="" />
-                                                        <p>{review.name}</p>
-                                                    </div>
-                                                    <p className="py-2">Date: {review.time}</p>
-                                                    <div className="rating rating-md ">
-                                                        {
-                                                            [1, 2, 3, 4, 5].map((a, index) => (
-                                                                <input key={index} type="radio" name={`rating-${review._id}`} className="mask mask-star-2 bg-accent " checked={a <= review.rating} readOnly />
-                                                            ))
-                                                        }
-        
-                                                    </div>
-                                                    <p className="text-xl capitalize"><span className="text-lg font-bold">Comment:</span> {review.comment}</p>
-                                                </div> )
-                                        }
-                                      </div>
-                                         :
-                                         <div className="text-2xl font-bold capitalize pt-4">
-                                             <p>there is no review for this room</p>
-                                         </div>
-                                        
+                                {
+                                    reviewData.filter(review => review.roomId == detail._id).length > 0 ?
+                                        <div>
+                                            {
+                                                reviewData.filter(review => review.roomId == detail._id).map(review =>
+                                                    <div key={review._id} className="p-4 border-solid border-b-2 border-accent">
+                                                        <div className="flex items-center font-bold text-2xl gap-2 capitalize">
+                                                            <img className="w-10" src="https://i.ibb.co/GCNcx9r/profile.png" alt="" />
+                                                            <p>{review.name}</p>
+                                                        </div>
+                                                        <p className="py-2">Date: {review.time}</p>
+                                                        <div className="rating rating-md ">
+                                                            {
+                                                                [1, 2, 3, 4, 5].map((a, index) => (
+                                                                    <input key={index} type="radio" name={`rating-${review._id}`} className="mask mask-star-2 bg-accent " checked={a <= review.rating} readOnly />
+                                                                ))
+                                                            }
 
-                                   
-                                   
+                                                        </div>
+                                                        <p className="text-xl capitalize"><span className="text-lg font-bold">Comment:</span> {review.comment}</p>
+                                                    </div>)
+                                            }
+                                        </div>
+                                        :
+                                        <div className="text-2xl font-bold capitalize pt-4">
+                                            <div className="flex justify-center">
+                                                <img className="w-48" src="https://i.ibb.co/nPqspWg/search.png" alt="" />
+                                            </div>                                             <p>there is no review for this room</p>
+                                        </div>
+
+
+
+
 
                                 }
                             </div>
@@ -242,11 +242,10 @@ const Details = () => {
                 </div>
             </div>
 
-
             {/* Booking  */}
             <dialog id="my_modal_5" className="modal ">
                 <div className="modal-box">
-                    <h3 className="font-bold text-lg">Information of Booking for {detail?.category}</h3>
+                    <h3 className="font-bold text-lg">Information of Booking for <span className="text-accent">{detail?.category}</span></h3>
 
                     <div className="">
 
@@ -332,7 +331,14 @@ const Details = () => {
                                         <p>name</p>
                                         <input type="text" placeholder="name" value={bookingData.name} readOnly name="name" className="input input-bordered input-accent w-full max-w-xs" />
                                         <p>Rating</p>
-                                        <input type="number" placeholder="rating" name="rating" min="1" max="5" className="input input-bordered input-accent w-full max-w-xs" />
+                                        <select name="rating" className="input input-bordered input-accent w-full max-w-xs">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                        </select>
+
                                         <p>Comment</p>
                                         <input type="text" placeholder="comment" name="comment" className="input input-bordered input-accent w-full max-w-xs" />
                                         <p>date</p>
