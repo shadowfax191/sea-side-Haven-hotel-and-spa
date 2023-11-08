@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import NavBar from "../layout/NavBar";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import toast from "react-hot-toast";
 import auth from "../Firebase/firebase";
@@ -11,7 +11,16 @@ import { Helmet } from "react-helmet-async";
 
 const Register = () => {
     window.scrollTo(0,0)
+    const [theme,setTheme]=useState('light')
 
+    const handleChange=()=>{
+        if(theme ==='light'){
+            setTheme('dark')
+        }
+        else{
+            setTheme('light')
+        }
+    }
 
     const {createUser}=useContext(AuthContext)
 
@@ -75,11 +84,11 @@ const Register = () => {
         
     }
     return (
-        <div>
+        <div data-theme={`${theme}`}>
             <Helmet>
                 <title>Sea Hotel | Register </title>
             </Helmet>
-            <NavBar></NavBar>
+            <NavBar handleChange={handleChange}></NavBar>
             <h1 className="text-5xl font-bold pb-5 text-center pt-10">Register now!</h1>
             <div className="hero "> 
                 <div className="hero-content flex-col lg:flex-row-reverse">

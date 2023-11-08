@@ -1,14 +1,14 @@
-import { useContext } from "react";
+/* eslint-disable react/prop-types */
+import { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
 import toast from "react-hot-toast";
-
-const NavBar = () => {
+import DarkModeToggle from "react-dark-mode-toggle";
+const NavBar = ({handleChange}) => {
 
     const { user, logOut } = useContext(AuthContext)
 
-
-    console.log(user);
+const [dark,setDark]=useState(false)
 
     const handleLogout = () => {
 
@@ -45,18 +45,18 @@ const NavBar = () => {
                                 {
                                     links
                                 }
-                                 {
-                            user ?
-                                <div className="space-y-3">
-                                   <div className="flex items-center gap-3">
-                                     <img className="w-12 rounded-full" src={user.photoURL}alt="" />
-                                    <p className="capitalize text-lg"> {user.displayName}</p>
-                                   </div>
-                                    <button onClick={handleLogout} className="btn btn-outline text-black w-full">logout</button>
+                                {
+                                    user ?
+                                        <div className="space-y-3">
+                                            <div className="flex items-center gap-3">
+                                                <img className="w-12 rounded-full" src={user.photoURL} alt="" />
+                                                <p className="capitalize text-lg"> {user.displayName}</p>
+                                            </div>
+                                            <button onClick={handleLogout} className="btn btn-outline text-black w-full">logout</button>
 
-                                </div> :
-                                <Link to='/login' className="btn btn-outline text-black w-full">login</Link>
-                        }
+                                        </div> :
+                                        <Link to='/login' className="btn btn-outline text-black w-full">login</Link>
+                                }
                             </ul>
                         </div>
                         <img className="w-8 md:w14" src="https://i.ibb.co/G31KM8p/review.png" alt="" />
@@ -67,13 +67,20 @@ const NavBar = () => {
                             {
                                 links
                             }
+                           <p onClick={handleChange}>
+                           <DarkModeToggle
+                                onChange={setDark}
+                                checked={dark}
+                                size={80}
+                            />
+                           </p>
                         </ul>
                     </div>
                     <div className="navbar-end">
                         {
                             user ?
                                 <div className="hidden lg:flex items-center space-x-3">
-                                    <img className="w-12 rounded-full" src={user.photoURL}alt="" />
+                                    <img className="w-12 rounded-full" src={user.photoURL} alt="" />
                                     <p className="capitalize text-lg"> {user.displayName}</p>
                                     <button onClick={handleLogout} className="btn btn-outline text-black">logout</button>
 

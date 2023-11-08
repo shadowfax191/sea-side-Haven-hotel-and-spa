@@ -26,7 +26,7 @@ const Location = () => {
                     <p> Explore the Scenic Beauty with Horse Riding</p>
                 </div>
                  <div className="flex gap-3 items-center ">
-                    <img className="w-9" src="https://i.ibb.co/ZM3M77C/bike.png" alt="" />
+                    <img className="w-9" src="https://i.ibb.co/vXXwnST/atv.png" alt="" />
                     <p>Discover Breathtaking Scenery with Bike Riding</p>
                 </div>
                  <div className="flex gap-3 items-center ">

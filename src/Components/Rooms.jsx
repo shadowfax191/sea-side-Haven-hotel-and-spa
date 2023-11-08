@@ -53,7 +53,7 @@ const Rooms = () => {
                     <option value="dsc">High to Low</option>
                 </select>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                 {
                     roomData.map(room =>
                         <div key={room.id}>
@@ -77,7 +77,9 @@ const Rooms = () => {
                                         }
                                          </p>
                                     </div>
-
+                                        <div className="flex justify-end text-end pt-2">
+                                            <button className="btn btn-accent">Book now</button>
+                                        </div>
                                 </div>
 
                             </div></Link>
