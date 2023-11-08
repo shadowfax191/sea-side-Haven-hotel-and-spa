@@ -70,10 +70,10 @@ const Rooms = () => {
 
                                     <div className="flex gap-2 items-center ">
                                         <img className="w-10" src="https://i.ibb.co/fdz9hQd/reviews.png" alt="" />
-                                        <p className="text-lg font-bold">Total Reviews: {
+                                        <p className="text-lg font-bold ">{
                                                     reviewData.length>0 ?
-                                                    <p>{ reviewData?.filter(review => review.roomId == room._id).length}</p>:
-                                                    <p className="text-base">log in to see Total Reviews</p>
+                                                    <p>Total Reviews :{ reviewData?.filter(review => review.roomId == room._id).length}</p>:
+                                                    <p className="text-base">Please logIn to see Total Reviews</p>
                                         }
                                          </p>
                                     </div>
