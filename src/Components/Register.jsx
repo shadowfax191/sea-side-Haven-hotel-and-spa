@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import auth from "../Firebase/firebase";
 import { updateProfile } from "firebase/auth";
 import axios from "axios";
+import { Helmet } from "react-helmet-async";
 
 
 const Register = () => {
@@ -73,6 +74,9 @@ const Register = () => {
     }
     return (
         <div>
+            <Helmet>
+                <title>Sea Hotel | Register </title>
+            </Helmet>
             <NavBar></NavBar>
             <h1 className="text-5xl font-bold pb-5 text-center pt-10">Register now!</h1>
             <div className="hero "> 

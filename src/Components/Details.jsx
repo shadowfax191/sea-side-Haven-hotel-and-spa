@@ -4,6 +4,7 @@ import { AuthContext } from "../Provider/AuthProvider";
 import axios from "axios";
 import toast from "react-hot-toast";
 import moment from "moment/moment";
+import { Helmet } from "react-helmet-async";
 
 
 const Details = () => {
@@ -112,6 +113,9 @@ const Details = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>Sea Hotel | Room Details </title>
+            </Helmet>
             {/* banner */}
 
             <div className="hero min-h-[60vh] " style={{ backgroundImage: `url(${detail?.displayImage})` }}>
