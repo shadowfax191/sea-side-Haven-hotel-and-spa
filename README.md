@@ -1,8 +1,16 @@
-# React + Vite
+Live Link: https://sea-side-haven.web.app
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+About My Project:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+i. In this project i have create a hotel booking service.
+
+ii. Here user can login with theire email and password and also with gmail.
+
+iii. There are 5 diff types of room if user wants to book the book . user have to log in 1st, after booking user can also review that room.
+
+iv. there are private route and its projected by the user Auth and also jwt from backend. So other can not access valid user data
+
+v.User can update date after booking on my booking page.
+
+vi.user cancel theire booking in booking page but have to cancle a day before booking day
