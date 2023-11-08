@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
 import moment from "moment";
+import { Helmet } from "react-helmet-async";
 
 
 
@@ -35,7 +36,7 @@ const MyBookings = () => {
     const handleDelete = () => {
 
         // console.log(roomID,newDate);
-       
+
 
         if (tomorrow < dateID) {
             axios.delete(`http://localhost:5000/bookingData/delete/${roomID}`)
@@ -105,7 +106,9 @@ const MyBookings = () => {
 
     return (
         <div className="min-h-[50vh] max-w-7xl mx-auto ">
-
+            <Helmet>
+                <title>Sea Hotel | My Bookings </title>
+            </Helmet>
 
 
             {

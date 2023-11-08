@@ -7,6 +7,9 @@ const NavBar = () => {
 
     const { user, logOut } = useContext(AuthContext)
 
+
+    console.log(user);
+
     const handleLogout = () => {
 
         logOut()
@@ -42,6 +45,18 @@ const NavBar = () => {
                                 {
                                     links
                                 }
+                                 {
+                            user ?
+                                <div className="space-y-3">
+                                   <div className="flex items-center gap-3">
+                                     <img className="w-12 rounded-full" src={user.photoURL}alt="" />
+                                    <p className="capitalize text-lg"> {user.displayName}</p>
+                                   </div>
+                                    <button onClick={handleLogout} className="btn btn-outline text-black w-full">logout</button>
+
+                                </div> :
+                                <Link to='/login' className="btn btn-outline text-black w-full">login</Link>
+                        }
                             </ul>
                         </div>
                         <img className="w-14" src="https://i.ibb.co/G31KM8p/review.png" alt="" />
@@ -57,8 +72,12 @@ const NavBar = () => {
                     <div className="navbar-end">
                         {
                             user ?
-                                <button onClick={handleLogout} className="btn btn-outline text-black">logout</button>
-                                :
+                                <div className="hidden lg:flex items-center space-x-3">
+                                    <img className="w-12 rounded-full" src={user.photoURL}alt="" />
+                                    <p className="capitalize text-lg"> {user.displayName}</p>
+                                    <button onClick={handleLogout} className="btn btn-outline text-black">logout</button>
+
+                                </div> :
                                 <Link to='/login' className="btn btn-outline text-black">login</Link>
                         }
 

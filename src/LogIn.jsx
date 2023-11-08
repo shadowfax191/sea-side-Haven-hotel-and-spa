@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { AuthContext } from "./Provider/AuthProvider";
 import toast from "react-hot-toast";
 import axios from "axios";
+import { Helmet } from "react-helmet-async";
 
 const LogIn = () => {
     const { signIn ,signInWithGoogle } = useContext(AuthContext)
@@ -88,6 +89,9 @@ const LogIn = () => {
     }
     return (
         <div>
+             <Helmet>
+                <title>Sea Hotel | Login </title>
+            </Helmet>
             <NavBar></NavBar>
             <h1 className="text-5xl font-bold pb-5 text-center pt-10">Login now!</h1>
             <div className="hero ">

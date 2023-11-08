@@ -18,6 +18,7 @@ import Details from './Components/Details.jsx';
 import ErrorPage from './Components/ErrorPage.jsx/ErrorPage.jsx';
 import AboutUs from './Components/optional/AboutUs.jsx';
 import Gallery from './Components/optional/Gallery.jsx';
+import { HelmetProvider } from 'react-helmet-async';
 
 const router = createBrowserRouter([
   {
@@ -68,7 +69,9 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-  <AuthProvider>  <RouterProvider router={router} /></AuthProvider>
+  <AuthProvider> <HelmetProvider>
+  <RouterProvider router={router} />
+    </HelmetProvider> </AuthProvider>
   <Toaster   position="top-right"
   reverseOrder={false}></Toaster>
   </React.StrictMode>,

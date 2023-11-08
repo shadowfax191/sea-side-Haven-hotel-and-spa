@@ -2,6 +2,7 @@
 
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { Link, useLoaderData } from "react-router-dom";
 
 
@@ -40,6 +41,9 @@ const Rooms = () => {
 
     return (
         <div className="max-w-7xl mx-auto py-10 px-5">
+             <Helmet>
+                <title>Sea Hotel | Rooms </title>
+            </Helmet>
             <div className="flex justify-end pb-5 px-4">
                 <select className=" w-56 h-10 border-solid border-accent border-2" value={sortOrder} onChange={(e) => SetSortOrder(e.target.value)} >
                     <option value="default">Default</option>
