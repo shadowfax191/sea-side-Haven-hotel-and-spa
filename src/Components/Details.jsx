@@ -5,6 +5,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import moment from "moment/moment";
 import { Helmet } from "react-helmet-async";
+import { motion } from "framer-motion"
 
 
 const Details = () => {
@@ -121,10 +122,23 @@ const Details = () => {
             <div className="hero min-h-[60vh] " style={{ backgroundImage: `url(${detail?.displayImage})` }}>
                 <div className="hero-overlay bg-opacity-70"></div>
                 <div className="hero-content text-center text-neutral-content">
+                <motion.div
+                    initial={{  scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{
+                      type: "easeIn",
+                      stiffness: 100,
+                      damping: 15,
+                      duration:1,
+                   
+                    }}
+                  >
                     <div className="max-w-md">
                         <h1 className="mb-5 text-5xl font-bold">{detail?.category}</h1>
                         <p className="mb-5">Indulge in the luxurious experience of your stay within the opulent confines of our {detail.category} room.</p>
                     </div>
+                    </motion.div>
+                   
                 </div>
             </div>
 
@@ -230,7 +244,7 @@ const Details = () => {
                     </div>
                 </div>
                 {/* carousel */}
-                <div className="carousel w-full flex-1">
+                <div className="carousel w-full flex-1 max-h-96">
                     {
                         images.map((image, index) =>
 

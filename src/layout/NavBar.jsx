@@ -28,7 +28,7 @@ const NavBar = () => {
         <li><NavLink to='/rooms' className={({ isActive }) => isActive ? 'btn btn-outline text-black  btn-sm' : ''}>Rooms</NavLink></li>
         <li><NavLink to='/roomBookings' className={({ isActive }) => isActive ? 'btn btn-outline text-black btn-sm' : ''}>My Bookings</NavLink></li>
         <li><NavLink to='/aboutUs' className={({ isActive }) => isActive ? 'btn btn-outline text-black btn-sm' : ''}>About Us</NavLink></li>
-        <li><NavLink to='/gallery' className={({ isActive }) => isActive ? 'btn btn-outline text-black btn-sm' : ''}>Gallery</NavLink></li>
+        <li><NavLink to='/contactUs' className={({ isActive }) => isActive ? 'btn btn-outline text-black btn-sm' : ''}>Contact Us</NavLink></li>
 
 
     </>

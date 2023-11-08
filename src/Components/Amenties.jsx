@@ -33,28 +33,28 @@ const Amenties = () => {
             <div className="grid grid-cols-2 justify-center  p-6 gap-10">
                     <div >
                        <div className="flex  items-center gap-3">
-                       <img className="w-12" src="https://i.ibb.co/Zh1JXN5/vacations.png" alt="" />
+                       <img className="w-8 md:w-12" src="https://i.ibb.co/Zh1JXN5/vacations.png" alt="" />
                         <p className="text-2xl text-accent ">Your beach</p>
                        </div>
                         <p className="pt-3">Discover Paradise on Your Private Beach Getaway</p>
                     </div>
                     <div >
                     <div className="flex  items-center gap-3">
-                       <img className="w-12" src="https://i.ibb.co/CsYZHNt/living-room.png" alt="" />
+                       <img className="w-8 md:w-12" src="https://i.ibb.co/CsYZHNt/living-room.png" alt="" />
                         <p className="text-2xl text-accent ">Room</p>
                        </div>
                         <p className="pt-3">Sleep Like Royalty on Our King-Size Beds</p>
                     </div>
                     <div >
                     <div className="flex  items-center gap-3">
-                       <img className="w-12" src="https://i.ibb.co/M1tXbc9/parking.png" alt="" />
+                       <img className="w-8 md:w-12" src="https://i.ibb.co/M1tXbc9/parking.png" alt="" />
                        <p className="text-2xl text-accent ">Parking</p>
                        </div>
                         <p className="pt-3">Resort entrance Car parking facilities</p>
                     </div>
                     <div >
                     <div className="flex  items-center gap-3">
-                       <img className="w-12" src="https://i.ibb.co/TrfcvNv/guard.png" alt="" />
+                       <img className="w-8 md:w-12" src="https://i.ibb.co/TrfcvNv/guard.png" alt="" />
                        <p className="text-2xl text-accent ">Security</p>
                        </div>
                         <p className="pt-3">Safety First: 24/7 Security & CCTV Surveillance</p>

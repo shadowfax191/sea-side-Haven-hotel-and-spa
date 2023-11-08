@@ -50,7 +50,7 @@ const router = createBrowserRouter([
         element:<AboutUs></AboutUs>,
       },
       {
-        path: "/gallery",
+        path: "/contactUs",
         element:<Gallery></Gallery>,
       },
     ]

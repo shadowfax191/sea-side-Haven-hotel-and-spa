@@ -78,8 +78,9 @@ const Banner = () => {
             <div className="hero-overlay bg-opacity-60"></div>
             <div className="hero-content text-center text-neutral-content">
               <div className="max-w-4xl">
-                <h1 className="mb-10 text-5xl font-bold ">Discover Our Rooms in Photos</h1>
+                <h1 className="mb-10 text-5xl font-bold ">Discover Our <span className="text-accent"> Rooms in Photos</span></h1>
                 <div className="grid grid-cols-2 gap-7">
+                  
                   <img src="https://i.ibb.co/p1gLT9R/premium-room-4.jpg" className="w-48 h-24 md:w-80 md:h-52 rounded-lg shadow-2xl" />
                   <img src="https://i.ibb.co/4VxqKyw/RR-Standard-2-Queen.jpg" className="w-48 h-24 md:w-80 md:h-52 rounded-lg shadow-2xl" />
                   <img src="https://i.ibb.co/qCcH5HK/0x0.webp" className="w-48 h-24 md:w-80 md:h-52 rounded-lg shadow-2xl" />
