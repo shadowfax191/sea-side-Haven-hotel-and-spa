@@ -26,12 +26,12 @@ const Details = () => {
     const confirm = bookedData.some(book => book.date == date && book.roomId == detail._id)
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/bookingData`,{withCredentials:true})
+        axios.get(`https://b8a11-server-side-shadowfax191-main.vercel.app/bookingData`,{withCredentials:true})
         .then(res => setBooked(res.data))
     }, [])
 
     useEffect(() => {
-            axios.get(`http://localhost:5000/reviewData`,{withCredentials:true})
+            axios.get(`https://b8a11-server-side-shadowfax191-main.vercel.app/reviewData`,{withCredentials:true})
             .then(res => setReview(res.data))
     }, [])
 
@@ -58,7 +58,7 @@ const Details = () => {
     }
 
     const handleBooking = () => {
-        axios.post('http://localhost:5000/bookingData', bookingData)
+        axios.post('https://b8a11-server-side-shadowfax191-main.vercel.app/bookingData', bookingData)
 
             .then(res => {
                 if (res.data.acknowledged) {
@@ -89,7 +89,7 @@ const Details = () => {
         const userId = user.uid
         const review = { name, rating, comment, time, roomId, userId }
 
-        axios.post('http://localhost:5000/reviewData', review)
+        axios.post('https://b8a11-server-side-shadowfax191-main.vercel.app/reviewData', review)
             .then(res => {
                 if (res.data.acknowledged) {
                     toast.success('Review Complete',

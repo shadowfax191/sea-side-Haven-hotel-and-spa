@@ -31,7 +31,7 @@ const MyBookings = () => {
     console.log(today);
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/bookingData/${uId}`, { withCredentials: true })
+        axios.get(`https://b8a11-server-side-shadowfax191-main.vercel.app/bookingData/${uId}`, { withCredentials: true })
             .then(res => setBooked(res.data))
     }, [uId])
 
@@ -41,7 +41,7 @@ const MyBookings = () => {
 
 
         if (tomorrow < dateID) {
-            axios.delete(`http://localhost:5000/bookingData/delete/${roomID}`)
+            axios.delete(`https://b8a11-server-side-shadowfax191-main.vercel.app/bookingData/delete/${roomID}`)
                 .then(res => {
                     if (res.data.deletedCount) {
                         const newData = bookedData.filter(booked => booked._id != roomID)
@@ -76,7 +76,7 @@ const MyBookings = () => {
     }
 
     const handleUpdate = (id) => {
-        axios.put(`http://localhost:5000/booking/update/${id}`, { date })
+        axios.put(`https://b8a11-server-side-shadowfax191-main.vercel.app/booking/update/${id}`, { date })
             .then(res => {
                 if (res.data.modifiedCount > 0) {
                     toast.success('Update booking date complete',

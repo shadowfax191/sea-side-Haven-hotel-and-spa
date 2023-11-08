@@ -35,7 +35,7 @@ const Rooms = () => {
     }, [sortOrder])
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/reviewData`,{withCredentials:true})
+        axios.get(`https://b8a11-server-side-shadowfax191-main.vercel.app/reviewData`,{withCredentials:true})
         .then(res => setReview(res.data))
     }, [])
 

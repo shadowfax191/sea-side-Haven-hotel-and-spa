@@ -33,7 +33,7 @@ const router = createBrowserRouter([
       {
         path: "/rooms",
         element: <Rooms></Rooms>,
-        loader:()=>fetch('http://localhost:5000/rooms')
+        loader:()=>fetch('https://b8a11-server-side-shadowfax191-main.vercel.app/rooms')
       },
       {
         path: "/roomBookings",
@@ -43,7 +43,7 @@ const router = createBrowserRouter([
       {
         path: "/details/:id",
         element: <PrivateRoute><Details></Details></PrivateRoute> ,
-        loader:({params})=>fetch(`http://localhost:5000/rooms/${params.id}`)
+        loader:({params})=>fetch(`https://b8a11-server-side-shadowfax191-main.vercel.app/rooms/${params.id}`)
       },
       {
         path: "/aboutUs",

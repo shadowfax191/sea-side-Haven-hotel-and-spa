@@ -30,7 +30,7 @@ const LogIn = () => {
                             },
                         })
                   
-                    axios.post('http://localhost:5000/jwt', { uId }, { withCredentials: true })
+                    axios.post('https://b8a11-server-side-shadowfax191-main.vercel.app/jwt', { uId }, { withCredentials: true })
                         .then(res => {
                             console.log(res.data);
                         })
@@ -67,7 +67,7 @@ const LogIn = () => {
                          },
                      })
                
-                 axios.post('http://localhost:5000/jwt', { uId }, { withCredentials: true })
+                 axios.post('https://b8a11-server-side-shadowfax191-main.vercel.app/jwt', { uId }, { withCredentials: true })
                      .then(res => {
                          console.log(res.data);
                      })
