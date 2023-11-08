@@ -4,6 +4,8 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link, useLoaderData } from "react-router-dom";
+import { motion } from "framer-motion"
+
 
 
 
@@ -42,7 +44,32 @@ const Rooms = () => {
     console.log(reviewData);
 
     return (
-        <div className="max-w-7xl mx-auto py-10 px-5">
+        <div>
+            <div className="hero min-h-[40vh] " style={{ backgroundImage: `url(https://i.ibb.co/Bt3VwVH/1301f2d5b3d0-KIDPS1-Nusantara-Presidential-Villa-Livingroom-High-Res-18384.jpg)` }}>
+                <div className="hero-overlay bg-opacity-70"></div>
+                <div className="hero-content text-center text-neutral-content">
+                <motion.div
+                    initial={{  scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{
+                      type: "easeIn",
+                      stiffness: 100,
+                      damping: 15,
+                      duration:1,
+                   
+                    }}
+                  >
+                    <div className="max-w-md">
+                    <p className="mb-5 text-5xl font-bold">Accommodation</p>
+                    <p className="mb-5">Experience the unparalleled luxury of your stay in the lavish surroundings of our exquisite hotel.</p>
+
+                    </div>
+                    </motion.div>
+                   
+                </div>
+            </div>
+       
+            <div className="max-w-7xl mx-auto py-10 px-5">
              <Helmet>
                 <title>Sea Hotel | Rooms </title>
             </Helmet>
@@ -87,6 +114,7 @@ const Rooms = () => {
                     )
                 }
             </div>
+        </div>
         </div>
     );
 };

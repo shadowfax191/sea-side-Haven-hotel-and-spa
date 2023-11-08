@@ -13,7 +13,7 @@ const FeaturedRooms = () => {
                 <img className="h-80 w-full rounded-lg" src="https://i.ibb.co/5GdhfsT/sayeman-beach-resort.jpg" alt="" />
             </div>
             <div className="mx-auto flex justify-center pb-10">
-              <Link to={`https://b8a11-server-side-shadowfax191-main.vercel.app/details/6547c4733cad4caf85179d6c`}> <button className="btn btn-accent ">Book Now</button></Link>
+              <Link to={`/details/6547c4733cad4caf85179d6c`}> <button className="btn btn-accent ">Book Now</button></Link>
             </div>
             
         </div>
