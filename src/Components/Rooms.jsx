@@ -9,6 +9,8 @@ import { Link, useLoaderData } from "react-router-dom";
 
 
 const Rooms = () => {
+    window.scrollTo(0,0)
+
     const dataLoad = useLoaderData()
     const [roomData, setRoomData] = useState([])
     const [sortOrder, SetSortOrder] = useState('default')

@@ -3,6 +3,8 @@ import { Helmet } from "react-helmet-async";
 
 
 const Gallery = () => {
+    window.scrollTo(0,0)
+
     return (
         <div>
             <Helmet>

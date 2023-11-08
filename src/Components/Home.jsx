@@ -5,6 +5,8 @@ import FeaturedRooms from "./FeaturedRooms";
 import Location from "./Location";
 
 const Home = () => {
+    window.scrollTo(0,0)
+
     return (
         <div className="">
             <Helmet>

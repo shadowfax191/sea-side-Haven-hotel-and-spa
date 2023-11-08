@@ -10,6 +10,8 @@ import { Helmet } from "react-helmet-async";
 
 
 const Register = () => {
+    window.scrollTo(0,0)
+
 
     const {createUser}=useContext(AuthContext)
 

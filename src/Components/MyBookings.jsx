@@ -10,6 +10,8 @@ import { Helmet } from "react-helmet-async";
 
 
 const MyBookings = () => {
+    window.scrollTo(0,0)
+
     const [bookedData, setBooked] = useState([])
     const { user } = useContext(AuthContext)
     const uId = user.uid;

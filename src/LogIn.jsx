@@ -7,6 +7,8 @@ import axios from "axios";
 import { Helmet } from "react-helmet-async";
 
 const LogIn = () => {
+    window.scrollTo(0,0)
+
     const { signIn ,signInWithGoogle } = useContext(AuthContext)
     const navigate = useNavigate()
     const location = useLocation()

@@ -9,6 +9,7 @@ import { motion } from "framer-motion"
 
 
 const Details = () => {
+    window.scrollTo(0,0)
     const detail = useLoaderData()
     const { user } = useContext(AuthContext)
     const images = detail.roomImages

@@ -2,6 +2,8 @@
 import { Helmet } from "react-helmet-async";
 
 const AboutUs = () => {
+    window.scrollTo(0,0)
+
     return (
         <div className="max-w-7xl mx-auto">
             <Helmet>
