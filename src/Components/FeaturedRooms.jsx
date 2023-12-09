@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 
 
 const FeaturedRooms = () => {
+   
     return (
         <div className="border-b-2 border-accent-focus mb-5">
             <h1 className="text-5xl font-bold text-center py-5 ">Featured <span className="text-accent">Rooms</span></h1>

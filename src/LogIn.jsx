@@ -40,9 +40,7 @@ const LogIn = () => {
                         })
                   
                     axios.post('https://b8a11-server-side-shadowfax191-main.vercel.app/jwt', { uId }, { withCredentials: true })
-                        .then(res => {
-                            console.log(res.data);
-                        })
+                       
 
 
                 }
@@ -50,7 +48,7 @@ const LogIn = () => {
                 navigate(location?.state ? location.state : '/')
             })
             .catch(err => {
-                console.log(err);
+              
                 toast.error(err.message,
                     {
                         style: {
@@ -77,9 +75,7 @@ const LogIn = () => {
                      })
                
                  axios.post('https://b8a11-server-side-shadowfax191-main.vercel.app/jwt', { uId }, { withCredentials: true })
-                     .then(res => {
-                         console.log(res.data);
-                     })
+                     
 
 
              }
@@ -87,7 +83,7 @@ const LogIn = () => {
              navigate(location?.state ? location.state : '/')
          })
          .catch(err => {
-             console.log(err);
+         
              toast.error(err.message,
                  {
                      style: {

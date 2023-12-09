@@ -28,7 +28,7 @@ const MyBookings = () => {
 
     const tomorrow = moment().add(1, 'days').format('YYYY-MM-DD');
 
-    console.log(today);
+   
 
     useEffect(() => {
         axios.get(`https://b8a11-server-side-shadowfax191-main.vercel.app/bookingData/${uId}`, { withCredentials: true })
@@ -37,7 +37,7 @@ const MyBookings = () => {
 
     const handleDelete = () => {
 
-        // console.log(roomID,newDate);
+    
 
 
         if (tomorrow < dateID) {
@@ -57,9 +57,7 @@ const MyBookings = () => {
                             })
                     }
                 })
-                .catch(err => {
-                    console.log(err);
-                })
+               
         }
         else {
             setDelete(false)
@@ -95,9 +93,7 @@ const MyBookings = () => {
                     }, 1000);
                 }
             })
-            .catch(err => {
-                console.log(err);
-            })
+           
     }
 
     const handleRefresh = () => [

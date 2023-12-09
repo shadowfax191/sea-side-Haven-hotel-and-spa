@@ -17,7 +17,7 @@ const handleContact=(e)=>{
             </Helmet>
             <div className="max-w-7xl mx-auto py-10">
                 <h1 className="text-center space-y-3 text-5xl font-extrabold pb-10">Contact Us </h1>
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-7">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-7 px-7">
                     <div className="text-center space-y-3 ">
                         <p className="text-3xl font-bold">Physical Address</p>
                         <p className="font-semibold text-lg">DolPhin more,
@@ -30,7 +30,7 @@ const handleContact=(e)=>{
                         <p className="font-semibold text-lg">Reservations:      +880 1111111111</p>
                         <p className="font-semibold text-lg">Customer Support:  +880 2222222222</p>
                     </div>
-                    <div className="text-center space-y-3 col-span-2">
+                    <div className="text-center space-y-3 md:col-span-2">
                         <p className="text-3xl font-bold">Email Addresses</p>
                         <p className="font-semibold text-lg">General Inquiries: info@yourhotel.com</p>
                         <p className="font-semibold text-lg">Reservations: reservations@yourhotel.com</p>
@@ -38,7 +38,7 @@ const handleContact=(e)=>{
                     </div>
                    
                 </div>
-                <div className="text-center  space-y-3 pt-10">
+                <div className="text-center  space-y-3 p-10">
                        <form onSubmit={handleContact} className=" space-y-3 pt-10">
                        <p className="text-3xl font-bold">Contact Form</p>
                         <p className="font-semibold text-lg ">Name: <input type="text" required  placeholder="Name" className="input  input-bordered input-accent w-full max-w-xs" /> </p>

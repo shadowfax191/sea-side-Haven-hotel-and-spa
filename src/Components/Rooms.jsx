@@ -11,7 +11,7 @@ import { motion } from "framer-motion"
 
 
 const Rooms = () => {
-    window.scrollTo(0,0)
+
 
     const dataLoad = useLoaderData()
     const [roomData, setRoomData] = useState([])
@@ -39,9 +39,8 @@ const Rooms = () => {
     useEffect(() => {
         axios.get(`https://b8a11-server-side-shadowfax191-main.vercel.app/reviewData`,{withCredentials:true})
         .then(res => setReview(res.data))
-    }, [])
+    }, []) 
 
-    console.log(reviewData);
 
     return (
         <div>
@@ -104,9 +103,7 @@ const Rooms = () => {
                                         }
                                          </p>
                                     </div>
-                                        <div className="flex justify-end text-end pt-2">
-                                            <button className="btn btn-accent">Book now</button>
-                                        </div>
+                                        
                                 </div>
 
                             </div></Link>
@@ -117,6 +114,7 @@ const Rooms = () => {
         </div>
         </div>
     );
+
 };
 
 export default Rooms;

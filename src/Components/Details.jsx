@@ -74,9 +74,7 @@ const Details = () => {
 
                 }
             })
-            .catch(err => {
-                console.log(err);
-            })
+            
     }
 
     const handleReview = (e) => {
@@ -107,9 +105,7 @@ const Details = () => {
 
                 }
             })
-            .catch(err => {
-                console.log(err);
-            })
+         
 
     }
 

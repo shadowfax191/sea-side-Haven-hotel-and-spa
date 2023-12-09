@@ -10,78 +10,76 @@ import { Helmet } from "react-helmet-async";
 
 
 const Register = () => {
-    window.scrollTo(0,0)
-    const [theme,setTheme]=useState('light')
+    window.scrollTo(0, 0)
+    const [theme, setTheme] = useState('light')
 
-    const handleChange=()=>{
-        if(theme ==='light'){
+    const handleChange = () => {
+        if (theme === 'light') {
             setTheme('dark')
         }
-        else{
+        else {
             setTheme('light')
         }
     }
 
-    const {createUser}=useContext(AuthContext)
+    const { createUser } = useContext(AuthContext)
 
     const handleSubmit = (e) => {
         e.preventDefault()
         const email = e.target.email.value
         const password = e.target.password.value
-        const name=e.target.name.value
-        const photo=e.target.url.value
-        if(/^(?=.*[A-Za-z])(?=.*[A-Z])(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/.test(password)){
-           
-            createUser(email,password)
-            .then(res=>{
-                const uId=res.user.uid
-               if(res.user.uid){
-                toast.success('Successfully Registration Complete ',
-                {
-                  style: {
-                    borderRadius: '10px',
-                    background: '#333',
-                    color: '#fff',
-                  },
-                })
-                axios.post('https://b8a11-server-side-shadowfax191-main.vercel.app/jwt', { uId }, { withCredentials: true })
-                .then(res => {
-                    console.log(res.data);
-                })
-               }
-               const user =auth.currentUser
-               if(user){
-                return updateProfile(user,{
-                    displayName:name,
-                    photoURL:photo
-                })
-               }
+        const name = e.target.name.value
+        const photo = e.target.url.value
+        if (/^(?=.*[A-Za-z])(?=.*[A-Z])(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/.test(password)) {
 
-            })
-            .catch(err=>{
-                console.log(err);
-               toast.error(err.message ,
-                {
-                  style: {
-                    borderRadius: '10px',
-                    background: '#FF0',
-                    color: '#333',
-                  },
-                });
-            })
+            createUser(email, password)
+                .then(res => {
+                    const uId = res.user.uid
+                    if (res.user.uid) {
+                        toast.success('Successfully Registration Complete ',
+                            {
+                                style: {
+                                    borderRadius: '10px',
+                                    background: '#333',
+                                    color: '#fff',
+                                },
+                            })
+                        axios.post('https://b8a11-server-side-shadowfax191-main.vercel.app/jwt', { uId }, { withCredentials: true })
+
+                    }
+                    const user = auth.currentUser
+                    if (user) {
+                        return updateProfile(user, {
+                            displayName: name,
+                            photoURL: photo
+                        })
+                    }
+
+                })
+                .catch(err => {
+
+                    toast.error(err.message,
+                        {
+                            style: {
+                                borderRadius: '10px',
+                                background: '#FF0',
+                                color: '#333',
+                            },
+                        });
+                })
         }
-        else{
+        else {
             toast.error('Password should contain 1 upper case,1 special character and at least 6 character',
-            {
- 
-              style: {
-                borderRadius: '10px',
-                background: '#FF0',
-                color: '#333',
-              },
-            })
+                {
+
+                    style: {
+                        borderRadius: '10px',
+                        background: '#FF0',
+                        color: '#333',
+                    },
+                })
         }
-        
+
     }
     return (
         <div data-theme={`${theme}`}>
@@ -90,15 +88,15 @@ const Register = () => {
             </Helmet>
             <NavBar handleChange={handleChange}></NavBar>
             <h1 className="text-5xl font-bold pb-5 text-center pt-10">Register now!</h1>
-            <div className="hero "> 
+            <div className="hero ">
                 <div className="hero-content flex-col lg:flex-row-reverse">
                     <div className="text-center lg:text-left flex-1">
-                       
+
                         <img src=" https://i.ibb.co/NsS9Ct3/6368592.jpg" alt="" />
                     </div>
                     <div className="card flex-shrink-0 w-full shadow-2xl bg-base-100 flex-1">
                         <form onSubmit={handleSubmit} className="card-body">
-                        <div className="form-control">
+                            <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Name</span>
                                 </label>

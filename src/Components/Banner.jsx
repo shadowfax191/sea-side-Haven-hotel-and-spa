@@ -9,38 +9,41 @@ const Banner = () => {
             <div className="hero-overlay bg-opacity-70"></div>
             <div className="hero-content text-center text-neutral-content">
               <div className="hero">
-                <div className="hero-content flex-col lg:flex-row">
+                <div className="hero-content  flex-col lg:flex-row">
                   <motion.div
-                    initial={{ x: -200,Y:0, scale: 0 }}
+                    initial={{ x: -400, Y: 0, scale: 0 }}
                     animate={{ x: 0, y: 0, scale: 1 }}
-                    transition={{
-                      type: "easeIn",
-                      stiffness: 100,
-                      damping: 15,
-                      duration:2,
-                   
-                    }}
-                  >
-                    <img src="https://i.ibb.co/yS58ftC/Oceanview-Room.jpg" className="max-w-sm md:max-w-lg rounded-lg shadow-2xl" />
-                    </motion.div>
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0 }}
-                    animate={{ opacity: 1, scale: 1 }}
                     transition={{
                       type: "spring",
                       stiffness: 100,
                       damping: 15,
-                      delay: 1,
-                      duration: 2,
+                     delay: 1,
+                      duration: 1,
+
+                    }}
+                  >
+                    <img src="https://i.ibb.co/yS58ftC/Oceanview-Room.jpg" className=" md:max-w-lg rounded-lg shadow-2xl" />
+                  </motion.div>
+               <div>
+               <motion.div
+                    initial={{  scale: 0 ,opacity: 0}}
+                    animate={{ scale: 1,opacity: 1 }}
+                    transition={{
+                      type: "spring easeIn",
+                      stiffness: 260,
+                      damping: 20,
+                      duration:1,
+                      delayChildren: 0.3,
+                      staggerChildren: 0.2
                     }}
 
                   > <div>
                       <h1 className="text-5xl font-bold ">Special <span className="text-accent">offers</span> </h1>
                       <p className="py-6 text-lg font-medium">Indulge in the serenity of our captivating beach view rooms with an exclusive discount, unlocked upon your very first login.</p>
                       <Link to='/login'><button className="btn btn-outline btn-accent">Log in now</button></Link>
-
-
-                    </div></motion.div>
+                    </div>
+                    </motion.div>
+               </div>
 
                 </div>
               </div>
@@ -57,12 +60,15 @@ const Banner = () => {
             <div className="hero-content text-center text-neutral-content">
               <div className="hero">
                 <div className="hero-content flex-col lg:flex-row-reverse">
-                  <img src="https://i.ibb.co/p1gLT9R/premium-room-4.jpg" className="max-w-sm md:max-w-lg rounded-lg shadow-2xl" />
+                  <img src="https://i.ibb.co/p1gLT9R/premium-room-4.jpg" className=" md:max-w-lg rounded-lg shadow-2xl" />
                   <div>
                     <h1 className="text-5xl font-bold">Discounts<span className="">!</span></h1>
                     <p className="py-6 text-lg font-medium ">Savor the opulence of our VIP room at an exclusive discounted rate on weekends</p>
                     <p className="text-sm py-3">*Terms and Conditions Applied</p>
-                    <button className="btn btn-outline btn-accent">Get Started</button>
+                    <Link to={`/details/6547c4733cad4caf85179d6c`}>
+                      <button className="btn btn-outline btn-accent">Get Started</button>
+
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -80,7 +86,7 @@ const Banner = () => {
               <div className="max-w-4xl">
                 <h1 className="mb-10 text-5xl font-bold ">Discover Our <span className="text-accent"> Rooms in Photos</span></h1>
                 <div className="grid grid-cols-2 gap-7">
-                  
+
                   <img src="https://i.ibb.co/p1gLT9R/premium-room-4.jpg" className="w-48 h-24 md:w-80 md:h-52 rounded-lg shadow-2xl" />
                   <img src="https://i.ibb.co/4VxqKyw/RR-Standard-2-Queen.jpg" className="w-48 h-24 md:w-80 md:h-52 rounded-lg shadow-2xl" />
                   <img src="https://i.ibb.co/qCcH5HK/0x0.webp" className="w-48 h-24 md:w-80 md:h-52 rounded-lg shadow-2xl" />

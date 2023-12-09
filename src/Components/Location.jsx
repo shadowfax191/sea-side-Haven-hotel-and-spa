@@ -4,18 +4,18 @@
 
 const Location = () => {
     return (
-        <div className="pb-10">
-            <h1 className="text-5xl font-bold text-center pb-10 "> Discover Our <span className="text-accent"> Stunning Location</span>
+        <div className="pb-10 px-6 md:px-10">
+            <h1 className="text-4xl md:5xl font-bold text-center pb-10 "> Discover Our <span className="text-accent"> Stunning Location</span>
             </h1>
             <div className="flex flex-col lg:flex-row gap-5"> 
            
-            <div className="flex-1 px-3">
+            <div className="flex-1 px-">
                 <h1 className="text-center text-3xl font-bold text-accent pb-2">Nearby Attractions</h1>
                 <p className="text-base font-medium"> Our hotel is just a stone's throw away from the pristine sea beach, offering you easy access to sun, surf, and sandy shores. <br /> Explore Marine Drive, Scenic Gem Just Moments Away</p>
 
 
                 <h1 className="text-center text-3xl font-bold pt-5 text-accent">Points of interest</h1>
-                <div className=" grid grid-cols-2 pt-3 gap-5">
+                <div className=" grid grid-cols-1  md:grid-cols-2 pt-3 gap-5">
                  <div className="flex gap-3 items-center ">
                     <img className="w-9" src="https://i.ibb.co/3N48qVS/jetski.png" alt="" />
                     <p> Experience Thrilling Skiing Adventures Near Our Hotel</p>
